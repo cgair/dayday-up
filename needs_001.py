@@ -40,6 +40,6 @@ def timed_quotation_up_down(symbol: str):
     limit_usage = int(response['limit_usage']['x-mbx-used-weight-1m'])
     access_limit(limit_usage)
     molecular = response['data'][0]["price"]
-    up_down = (int(float(molecular)) - int(float(denominator)))/ int(float(denominator))
+    up_down = (float(molecular) - float(denominator))/ float(denominator)
 
     return up_down
