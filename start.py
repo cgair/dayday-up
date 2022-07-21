@@ -30,8 +30,7 @@ def job_1():
         up_down = timed_quotation_up_down(s)
         content = QUOTATION_FMT.format(s, s, price, fmt_time, up_down)
         to_send = to_send + content
-    print(to_send)
-    # response = send_msg(to_send)
+    response = send_msg(to_send)
     logging.info(response)
             
 
