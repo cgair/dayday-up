@@ -9,9 +9,9 @@ from needs_001 import *
 from dingding_client import send_msg
 from utils import *
 
-SYMBOLS=["BTCUSDT", "ETHUSDT", "DOGEUSDT"]
+SYMBOLS=["BTCUSDT", "ETHUSDT"]
 # SYMBOLS=["ETHUSDT"]   # for test
-QUOTATION_FMT="------------------------------------\n[{}]\n{}: ${} U\n时间: {}\n过去1天的涨跌幅: {:.2%}\n"
+QUOTATION_FMT="-------------------------\n[{}]\n{}: ${} U\n时间: {}\n过去1天的涨跌幅: {:.2%}\n"
 
 
 # Get symnols latest prices
@@ -30,7 +30,7 @@ def job_1():
         up_down = timed_quotation_up_down(s)
         content = QUOTATION_FMT.format(s, s, price, fmt_time, up_down)
         to_send = to_send + content
-    response = send_msg(content)
+    response = send_msg(to_send)
     logging.info(response)
             
 
@@ -42,9 +42,9 @@ def main():
 
 
 if __name__ == '__main__':
-    # config_logging(logging, logging.DEBUG)
-    config_logging(logging, logging.INFO)
-    main()
+    config_logging(logging, logging.DEBUG)
+    # config_logging(logging, logging.INFO)
+    # main()
 
     # for test
-    # job_1()
+    job_1()
