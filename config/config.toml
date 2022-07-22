@@ -1,0 +1,4 @@
+# APP CONFIG
+
+[need1]
+symbols = ["BTCUSDT", "ETHUSDT", "DOGEUSDT"]
