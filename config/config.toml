@@ -6,9 +6,9 @@ symbols = ["BTCUSDT", "ETHUSDT", "DOGEUSDT"]
 [need2]
     [need2.symbol1]
     symbols='ETHUSDT'
-    'critical_price'=1111.74
-    'volume'=400    # 成交量
+    critical_price=1111.74
+    volume=400    # 成交量
     # [need2_3.symbol2]
     # symbols='BTCUSDT'
     # critical_price=1111.75
-    # 'volume'=400 
+    # volume=400 
