@@ -40,6 +40,7 @@ def job_1(config: Config):
             
 
 def job_2(config: Config):
+    logging.debug("Starting job2...")
     config = config['need2']
     handler = []
     for value in config.values():
