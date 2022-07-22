@@ -28,6 +28,16 @@ class UMWebsocketClient(object):
     def on_close(self, close_status_code, close_msg):
         logging.debug(f'closed: {close_status_code}, {close_msg}')
     
+    def on_error(self, error):
+        global reconnect_count
+        if type(error)==ConnectionRefusedError or type(error)==websocket._exceptions.WebSocketConnectionClosedException:
+            logging.info(f"Attempting to reconnect {reconnect_count}")
+            reconnect_count += 1
+            if reconnect_count < 100:
+                self.start()
+        else:
+            logging.error("encounter other error!")
+    
     def start(self):
         # if kind == 'kline':
         # Enable running status tracking. 
@@ -37,8 +47,12 @@ class UMWebsocketClient(object):
             self.url,
             on_message=self.on_message,
             on_close=self.on_close)
-
-        self.ws.run_forever()
+        try:
+            self.ws.run_forever()
+        except KeyboardInterrupt:
+            self.ws.close()  
+        except:
+            self.ws.close() 
 
     def _is_crossing(self, message):
         symbol = message['s']
