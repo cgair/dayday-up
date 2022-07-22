@@ -39,7 +39,7 @@ def job_1(config: Config):
     # logging.info(to_send)
             
 
-def job_2(config: Config):
+def job_2(config):
     logging.debug("Starting job2...")
     config = config.config['need2']
     handler = []
@@ -59,7 +59,7 @@ def job_2(config: Config):
 def main():
     config = Config()
     # BlockingScheduler
-    t = threading.Thread(target=job_2, args=(config))
+    t = threading.Thread(target=job_2, args=(config,))
     t.start()
     sched = BlockingScheduler()
     sched.add_job(job_1, 'interval', args=[config], hours=4, id='need-001', start_date='2022-07-21 08:00:00', end_date='2022-07-28 13:00:00')
