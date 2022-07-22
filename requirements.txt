@@ -1,4 +1,5 @@
 binance-futures-connector
+websocket-client
 apscheduler
 watchdog
 pytest
