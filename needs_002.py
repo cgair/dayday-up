@@ -5,7 +5,9 @@
 # The example of the message body is as follows:
 # "ETHUSDT Crossing 1111.74"
 import logging
+import demjson
 import websocket
+
 from dingding_client import send_msg, send_msg_at
 from start import CROSSING_FMT, VOLUME_FMT
 
@@ -20,6 +22,7 @@ class UMWebsocketClient(object):
         self.volume = volume
 
     def on_message(self, obj, message):
+        message = demjson.decode(message)
         logging.debug(f"received: {message}")
         self._is_crossing(message)
         if self.volume:
@@ -56,16 +59,16 @@ class UMWebsocketClient(object):
 
     def _is_crossing(self, message):
         symbol = message['s']
-        tx_num = message['v'] # Transaction numbers during this K line
-        if tx_num >= self.volume:
+        tx_num = message['k']['v'] # Transaction numbers during this K line
+        if float(tx_num) >= float(self.volume):
             content = VOLUME_FMT.format(symbol, 1, self.volume, tx_num)
             send_msg_at(content)
 
     def _is_surpassing(self, message):
         symbol = message['s']
-        tx_price_h = message['h']    # The highest transaction price during this K line
-        tx_price_l = message['l']    # The lowest transaction price during this K line
-        if tx_price_h > self.critical_price and tx_price_l < self.critical_price:
+        tx_price_h = message['k']['h']    # The highest transaction price during this K line
+        tx_price_l = message['k']['l']    # The lowest transaction price during this K line
+        if float(tx_price_h) > float(self.critical_price) and float(tx_price_l) < float(self.critical_price):
             content = CROSSING_FMT.format(symbol, self.critical_price)
             send_msg(content)
 

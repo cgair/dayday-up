@@ -93,5 +93,9 @@ if __name__ == '__main__':
     #         print(f"volume: {volume}")
     # conf = toml.load("config/config.toml")
     # job_2(conf)
-
+    # message = "{\"e\":\"kline\",\"E\":1658484945178,\"s\":\"ETHUSDT\",\"k\":{\"t\":1658484900000,\"T\":1658484959999,\"s\":\"ETHUSDT\",\"i\":\"1m\",\"f\":1943405741,\"L\":1943408163,\"o\":\"1636.99\",\"c\":\"1635.30\",\"h\":\"1637.61\",\"l\":\"1634.99\",\"v\":\"2981.487\",\"n\":2423,\"x\":false,\"q\":\"4876715.45741\",\"V\":\"912.314\",\"Q\":\"1492211.46665\",\"B\":\"0\"}}"
+    # message = message.replace("\\", "")
+    # import demjson
+    # dic = demjson.decode(message)
+    # print(dic)
 
