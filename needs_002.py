@@ -7,6 +7,7 @@
 import logging
 import demjson
 import websocket
+import time
 
 from dingding_client import send_msg, send_msg_at
 from start import CROSSING_FMT, VOLUME_FMT
@@ -27,6 +28,7 @@ class UMWebsocketClient(object):
         self._is_crossing(message)
         if self.volume:
             self._is_surpassing(message)
+        time.sleep(60)
 
     def on_close(self, close_status_code, close_msg):
         logging.debug(f'closed: {close_status_code}, {close_msg}')
