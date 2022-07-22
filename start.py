@@ -62,12 +62,13 @@ def main():
     sched.add_job(job_1, 'interval', args=[config], hours=4, id='need-001', start_date='2022-07-21 08:00:00', end_date='2022-07-28 13:00:00')
     # sched.add_job(job_1, 'interval', args=[config], minutes=1, id='need-001')
     sched.start()
+    job_2()
 
 
 if __name__ == '__main__':
     config_logging(logging, logging.DEBUG)
     # config_logging(logging, logging.INFO)
-    # main()
+    main()
 
     # the following code is only for test
     # 
