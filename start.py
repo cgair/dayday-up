@@ -69,8 +69,8 @@ def main():
 
 
 if __name__ == '__main__':
-    config_logging(logging, logging.DEBUG)
-    # config_logging(logging, logging.INFO)
+    # config_logging(logging, logging.DEBUG)
+    config_logging(logging, logging.INFO)
     main()
 
     # the following code is only for test
