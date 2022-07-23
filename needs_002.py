@@ -59,14 +59,14 @@ class UMWebsocketClient(object):
         except:
             self.ws.close() 
 
-    def _is_crossing(self, message):
+    def _is_surpassing(self, message):
         symbol = message['s']
         tx_num = message['k']['v'] # Transaction numbers during this K line
         if float(tx_num) >= float(self.volume):
             content = VOLUME_FMT.format(symbol, 1, self.volume, tx_num)
             send_msg_at(content)
 
-    def _is_surpassing(self, message):
+    def _is_crossing(self, message):
         symbol = message['s']
         tx_price_h = message['k']['h']    # The highest transaction price during this K line
         tx_price_l = message['k']['l']    # The lowest transaction price during this K line
