@@ -16,7 +16,7 @@ KLINE = 'wss://fstream.binance.com/ws/{}@kline_1m' # TODO interval should be con
 
 
 class UMWebsocketClient(object):
-    def __init__(self, url, critical_price, volume=None):
+    def __init__(self, url, critical_price, volume):
         self.ws = None
         self.url = url
         self.critical_price = critical_price
@@ -25,7 +25,8 @@ class UMWebsocketClient(object):
     def on_message(self, obj, message):
         message = demjson.decode(message)
         logging.debug(f"received: {message}")
-        self._is_crossing(message)
+        if self.critical_price:
+            self._is_crossing(message)
         if self.volume:
             self._is_surpassing(message)
         time.sleep(60)

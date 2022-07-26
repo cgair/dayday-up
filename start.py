@@ -44,10 +44,9 @@ def job_2(config):
     config = config.config['need2']
     handler = []
     for value in config.values():
-        volume = None
-        symbol, critical_price = value['symbols'], value['critical_price']
-        if 'volume' in value.keys():
-            volume = value['volume'] 
+        symbol = value['symbol'] if 'symbol' in value.keys() else 'ETHUSDT'
+        critical_price = value['critical_price'] if 'critical_price' in value.keys() else None
+        volume = value['volume'] if 'volume' in value.keys() else None
         # params = {'symbol': symbol, 'critical_price': critical_price}
         t = threading.Thread(target=start_websocket, args=(symbol, critical_price, volume))
         t.start()
@@ -69,8 +68,8 @@ def main():
 
 
 if __name__ == '__main__':
-    # config_logging(logging, logging.DEBUG)
-    config_logging(logging, logging.INFO)
+    config_logging(logging, logging.DEBUG)
+    # config_logging(logging, logging.INFO)
     main()
 
     # the following code is only for test
